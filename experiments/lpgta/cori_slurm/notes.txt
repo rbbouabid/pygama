@@ -1,6 +1,0 @@
-sacct command:
-
-sacct -j 34949936.batch --format=jobid,account,cluster,nnodes,ncpus,cputime,usercpu,systemcpu,totalcpu,avecpufreq,maxrss,maxvmsize,maxdiskread,maxdiskwrite,consumedenergy
-
-add option '-P' for | delimited output
-
