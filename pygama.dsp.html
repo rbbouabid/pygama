@@ -98,7 +98,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#pygama-dsp-waveformbrowser-module">pygama.dsp.WaveformBrowser module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#module-pygama.dsp.build_processing_chain">pygama.dsp.build_processing_chain module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#module-pygama.dsp.dsp_optimize">pygama.dsp.dsp_optimize module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#module-pygama.dsp.processors">pygama.dsp.processors module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pygama-dsp-processors-module">pygama.dsp.processors module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#module-pygama.dsp.units">pygama.dsp.units module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#module-pygama.dsp">Module contents</a></li>
 </ul>
@@ -517,12 +517,15 @@ in the config file.</p>
 <p>Parameter Grid class</p>
 <p>Each ParGrid entry corresponds to a dsp parameter to be varied.
 The ntuples must follow the pattern:
-( name, i_arg, value_strs companions) : ( str, int, list of str, list or None )
-where name is the name of the dsp routine in dsp_config whose  be
+( name, i_arg, value_strs, companions) : ( str, int, list of str, list, or None )
+where name is the name of the dsp routine in dsp_config whose to be
 optimized, i_arg is the index of the argument to be varied, value_strs is
 the array of strings to set the argument to, and companions is an optional
 list of ( name, i_arg, value_strs ) tuples for companion arguments that
 need to change along with this one</p>
+<p>Optionally, i_arg can be a list of the argument indices to be varied together,
+where value_strs is a list of lists correponding to the strings to set the
+arguments to in the same order.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="pygama.dsp.dsp_optimize.ParGrid.add_dimension">
 <span class="sig-name descname"><span class="pre">add_dimension</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">i_arg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_strs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">companions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygama/dsp/dsp_optimize.html#ParGrid.add_dimension"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygama.dsp.dsp_optimize.ParGrid.add_dimension" title="Permalink to this definition">¶</a></dt>
@@ -621,7 +624,7 @@ the order appearin in dims (first dimension is first for loop, etc):</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pygama.dsp.dsp_optimize.run_grid">
-<span class="sig-prename descclassname"><span class="pre">pygama.dsp.dsp_optimize.</span></span><span class="sig-name descname"><span class="pre">run_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tb_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dsp_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fom_function</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbosity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygama/dsp/dsp_optimize.html#run_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygama.dsp.dsp_optimize.run_grid" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">pygama.dsp.dsp_optimize.</span></span><span class="sig-name descname"><span class="pre">run_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">tb_data</span></em>, <em class="sig-param"><span class="pre">dsp_config</span></em>, <em class="sig-param"><span class="pre">grid</span></em>, <em class="sig-param"><span class="pre">fom_function</span></em>, <em class="sig-param"><span class="pre">dtype=&lt;class</span> <span class="pre">'numpy.float64'&gt;</span></em>, <em class="sig-param"><span class="pre">db_dict=None</span></em>, <em class="sig-param"><span class="pre">verbosity=0</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygama/dsp/dsp_optimize.html#run_grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygama.dsp.dsp_optimize.run_grid" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extract a table of optimization values for a grid of DSP parameters</p>
 <p>The grid argument defines a list of parameters and values over which to run
 the DSP defined in dsp_config on tb_data. At each point, a scalar
@@ -642,9 +645,12 @@ list of output variables to appear in the output table for each grid point</p>
 must return a scalar figure-of-merit. Should accept verbosity as a
 second keyword argument</p>
 </dd>
+<dt>dtype<span class="classifier">dtype (optional)</span></dt><dd><p>The data type of the fom_function's return object. Should be np.ndarray if
+fom_function is set to None</p>
+</dd>
 <dt>db_dict<span class="classifier">dict (optional)</span></dt><dd><p>DSP parameters database. See build_processing_chain for formatting info</p>
 </dd>
-<dt>verbosity<span class="classifier">int (optional)</span></dt><dd><p>verbosity for the processing chain and fom_function calls</p>
+<dt>verbosity<span class="classifier">int (optional)</span></dt><dd><p>Verbosity for the processing chain and fom_function calls</p>
 </dd>
 </dl>
 <dl class="simple">
@@ -657,7 +663,7 @@ of the grid argument</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pygama.dsp.dsp_optimize.run_one_dsp">
 <span class="sig-prename descclassname"><span class="pre">pygama.dsp.dsp_optimize.</span></span><span class="sig-name descname"><span class="pre">run_one_dsp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tb_data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dsp_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fom_function</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbosity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygama/dsp/dsp_optimize.html#run_one_dsp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygama.dsp.dsp_optimize.run_one_dsp" title="Permalink to this definition">¶</a></dt>
-<dd><p>run one iteration of DSP on tb_data</p>
+<dd><p>Run one iteration of DSP on tb_data</p>
 <p>Optionally returns a value for optimization</p>
 <dl class="simple">
 <dt>tb_data<span class="classifier">lh5 Table</span></dt><dd><p>An input table of lh5 data. Typically a selection is made prior to
@@ -686,17 +692,8 @@ optimization will be based. Should accept verbosity as a second argument</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-pygama.dsp.processors">
-<span id="pygama-dsp-processors-module"></span><h2>pygama.dsp.processors module<a class="headerlink" href="#module-pygama.dsp.processors" title="Permalink to this headline">¶</a></h2>
-<p>Contains a list of dsp processors used by the legend experiment, implemented
-using numba's guvectorize to implement numpy's ufunc interface. In other words,
-all of the functions are void functions whose outputs are given as parameters.
-The ufunc interface provides additional information about the function
-signatures that enables broadcasting the arrays and SIMD processing. Thanks to
-the ufunc interface, they can also be called to return a numpy array, but if</p>
-<blockquote>
-<div><p>this is done, memory will be allocated for this array, slowing things down.</p>
-</div></blockquote>
+<div class="section" id="pygama-dsp-processors-module">
+<h2>pygama.dsp.processors module<a class="headerlink" href="#pygama-dsp-processors-module" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="module-pygama.dsp.units">
 <span id="pygama-dsp-units-module"></span><h2>pygama.dsp.units module<a class="headerlink" href="#module-pygama.dsp.units" title="Permalink to this headline">¶</a></h2>
