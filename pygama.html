@@ -113,13 +113,13 @@
 <li class="toctree-l2"><a class="reference internal" href="pygama.io.html#pygama-io-mgdodecoder-module">pygama.io.MGDODecoder module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pygama.io.html#module-pygama.io.ch_group">pygama.io.ch_group module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pygama.io.html#module-pygama.io.compassdaq">pygama.io.compassdaq module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pygama.io.html#pygama-io-daq-to-raw-module">pygama.io.daq_to_raw module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pygama.io.html#module-pygama.io.daq_to_raw">pygama.io.daq_to_raw module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pygama.io.html#module-pygama.io.fcdaq">pygama.io.fcdaq module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pygama.io.html#module-pygama.io.io_base">pygama.io.io_base module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pygama.io.html#module-pygama.io.lh5">pygama.io.lh5 module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pygama.io.html#module-pygama.io.llamadaq">pygama.io.llamadaq module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pygama.io.html#pygama-io-orca-digitizers-module">pygama.io.orca_digitizers module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pygama.io.html#pygama-io-orcadaq-module">pygama.io.orcadaq module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pygama.io.html#module-pygama.io.orca_digitizers">pygama.io.orca_digitizers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pygama.io.html#module-pygama.io.orcadaq">pygama.io.orcadaq module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pygama.io.html#module-pygama.io.pollers">pygama.io.pollers module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pygama.io.html#module-pygama.io.raw_to_dsp">pygama.io.raw_to_dsp module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pygama.io.html#module-pygama.io.wfcompress">pygama.io.wfcompress module</a></li>
@@ -272,7 +272,7 @@ Or add your own [label].mpl file in the pygama directory!</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="pygama.utils.tqdm_range">
-<span class="sig-prename descclassname"><span class="pre">pygama.utils.</span></span><span class="sig-name descname"><span class="pre">tqdm_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bar_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygama/utils.html#tqdm_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygama.utils.tqdm_range" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">pygama.utils.</span></span><span class="sig-name descname"><span class="pre">tqdm_range</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bar_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygama/utils.html#tqdm_range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygama.utils.tqdm_range" title="Permalink to this definition"></a></dt>
 <dd><p>Uses tqdm.trange which wraps around the python range and also has the option
 to display a progress</p>
 <p class="rubric">Example</p>
@@ -312,6 +312,11 @@ TTree::Draw can only handle groups of 4 variables at a time,
 but here we can put in as many as we want, and
 return a list of numpy.ndarrays for each one</p>
 </dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pygama.utils.update_progress">
+<span class="sig-prename descclassname"><span class="pre">pygama.utils.</span></span><span class="sig-name descname"><span class="pre">update_progress</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tqdm_bar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">progress</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pygama/utils.html#update_progress"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygama.utils.update_progress" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
 
 </section>
 <section id="module-pygama">
