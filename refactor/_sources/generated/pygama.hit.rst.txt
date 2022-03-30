@@ -5,6 +5,7 @@ pygama.hit package
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:
 
 Submodules
 ----------
@@ -16,3 +17,4 @@ pygama.hit.build\_hit module
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:

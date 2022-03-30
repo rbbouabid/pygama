@@ -5,6 +5,7 @@ pygama package
    :members:
    :undoc-members:
    :show-inheritance:
+   :private-members:
 
 Subpackages
 -----------
@@ -13,6 +14,10 @@ Subpackages
    :maxdepth: 4
 
    pygama.dsp
+   pygama.flow
    pygama.hit
    pygama.lgdo
+   pygama.math
+   pygama.pargen
    pygama.raw
+   pygama.vis
