@@ -7,6 +7,15 @@ pygama.raw package
    :show-inheritance:
    :private-members:
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   pygama.raw.fc
+   pygama.raw.orca
+
 Submodules
 ----------
 
