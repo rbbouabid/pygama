@@ -54,7 +54,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#pygama-raw-build-raw-module">pygama.raw.build_raw module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#module-pygama.raw.data_decoder">pygama.raw.data_decoder module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#pygama-raw-data-streamer-module">pygama.raw.data_streamer module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-pygama.raw.data_streamer">pygama.raw.data_streamer module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#module-pygama.raw.raw_buffer">pygama.raw.raw_buffer module</a></li>
 </ul>
 </li>
@@ -135,15 +135,16 @@ table.</p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="pygama.raw.fc.html">pygama.raw.fc package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="pygama.raw.fc.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pygama.raw.fc.html#pygama-raw-fc-fc-config-decoder-module">pygama.raw.fc.fc_config_decoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pygama.raw.fc.html#module-pygama.raw.fc.fc_config_decoder">pygama.raw.fc.fc_config_decoder module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pygama.raw.fc.html#module-pygama.raw.fc.fc_event_decoder">pygama.raw.fc.fc_event_decoder module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pygama.raw.fc.html#pygama-raw-fc-fc-status-decoder-module">pygama.raw.fc.fc_status_decoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pygama.raw.fc.html#module-pygama.raw.fc.fc_status_decoder">pygama.raw.fc.fc_status_decoder module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pygama.raw.fc.html#pygama-raw-fc-fc-streamer-module">pygama.raw.fc.fc_streamer module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="pygama.raw.orca.html">pygama.raw.orca package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="pygama.raw.orca.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pygama.raw.orca.html#pygama-raw-orca-orca-digitizers-module">pygama.raw.orca.orca_digitizers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pygama.raw.orca.html#pygama-raw-orca-orca-flashcam-module">pygama.raw.orca.orca_flashcam module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pygama.raw.orca.html#pygama-raw-orca-orca-pollers-module">pygama.raw.orca.orca_pollers module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pygama.raw.orca.html#pygama-raw-orca-stream-orca-module">pygama.raw.orca.stream_orca module</a></li>
 </ul>
@@ -204,10 +205,11 @@ the constructor</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="pygama.raw.data_decoder.DataDecoder.get_keys_list">
-<span class="sig-name descname"><span class="pre">get_keys_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pygama.raw.data_decoder.DataDecoder.get_keys_list" title="Permalink to this definition"></a></dt>
+<dt class="sig sig-object py" id="pygama.raw.data_decoder.DataDecoder.get_key_list">
+<span class="sig-name descname"><span class="pre">get_key_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pygama.raw.data_decoder.DataDecoder.get_key_list" title="Permalink to this definition"></a></dt>
 <dd><p>overload with list of keys for this decoder.
-e.g. <cite>return range(n_channels)</cite></p>
+e.g. <cite>return range(n_channels)</cite>
+The default version works for decoders with single / no keys</p>
 </dd></dl>
 
 <dl class="py method">
@@ -263,8 +265,149 @@ hardware). Leave as None if such specialization is not necessary</p></li>
 </dd></dl>
 
 </section>
-<section id="pygama-raw-data-streamer-module">
-<h2>pygama.raw.data_streamer module<a class="headerlink" href="#pygama-raw-data-streamer-module" title="Permalink to this headline"></a></h2>
+<section id="module-pygama.raw.data_streamer">
+<span id="pygama-raw-data-streamer-module"></span><h2>pygama.raw.data_streamer module<a class="headerlink" href="#module-pygama.raw.data_streamer" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pygama.raw.data_streamer.DataStreamer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygama.raw.data_streamer.</span></span><span class="sig-name descname"><span class="pre">DataStreamer</span></span><a class="headerlink" href="#pygama.raw.data_streamer.DataStreamer" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<p>Base clase for data streams</p>
+<p>Provides a uniform interface for streaming, e.g.</p>
+<p>&gt; header = ds.open_stream(stream_name)
+&gt; for chunk in ds: do_something(chunk)</p>
+<p>Also provides default management of the RawBufferLibrary used for data reading:
+- allocation (if needed)
+- configuration (to match the stream)
+- fill level checking</p>
+<p>Derived classes must define the functions get_decoder_list(), open_stream(),
+and read_packet(); see below.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pygama.raw.data_streamer.DataStreamer._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#pygama.raw.data_streamer.DataStreamer._abc_impl" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pygama.raw.data_streamer.DataStreamer.build_default_rb_lib">
+<span class="sig-name descname"><span class="pre">build_default_rb_lib</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out_stream</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygama.raw.data_streamer.DataStreamer.build_default_rb_lib" title="Permalink to this definition"></a></dt>
+<dd><p>Build the most basic RawBufferLibrary that will work for this stream.</p>
+<p>A RawBufferList containing a single RawBuffer is built for each decoder
+name returned by get_decoder_list. Each buffer's out_name is set to the
+decoder name. The lgdo's do not get initialized.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pygama.raw.data_streamer.DataStreamer.get_decoder_list">
+<span class="sig-name descname"><span class="pre">get_decoder_list</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pygama.raw.data_streamer.DataStreamer.get_decoder_list" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a list of decoder objects for this data stream.
+Needs to be overloaded. Gets called during open_stream().</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pygama.raw.data_streamer.DataStreamer.open_stream">
+<span class="sig-name descname"><span class="pre">open_stream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stream_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rb_lib</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffer_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8192</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chunk_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'any_full'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_stream</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbosity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygama.raw.data_streamer.DataStreamer.open_stream" title="Permalink to this definition"></a></dt>
+<dd><p>Open and initialize a data stream</p>
+<p>Open the stream, read in the header, set up the buffers</p>
+<p>Call super().initialize([args]) from derived class after loading header
+info to run this default version that sets up buffers in rb_lib using
+the stream's decoders</p>
+<p>Note: this default version has no actual return value! You must overload
+this function, set self.n_bytes_read to the header packet size, and
+return the header data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>stream_name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) -- typically a filename or e.g. a port for streaming</p></li>
+<li><p><strong>rb_lib</strong> (<a class="reference internal" href="#pygama.raw.raw_buffer.RawBufferLibrary" title="pygama.raw.raw_buffer.RawBufferLibrary"><em>RawBufferLibrary</em></a>) -- A library of buffers for readout from the data stream. rb_lib will
+have its lgdo's initialized during this function</p></li>
+<li><p><strong>buffer_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) -- length of buffers to be read out in read_chunk (for buffers with
+variable length)</p></li>
+<li><p><strong>chunk_mode</strong> (<em>'any_full'</em><em>, </em><em>'only_full'</em><em>, or </em><em>'single_packet'</em>) -- sets the mode use for read_chunk</p></li>
+<li><p><strong>out_stream</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) -- optional name of output stream for default rb_lib generation</p></li>
+<li><p><strong>verbosity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) -- verbosity level for the initialize function</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p><strong>header_data</strong> --</p>
+<dl class="simple">
+<dt>header_data is a list of RawBuffer's containing any file header</dt><dd><p>data, ready for writing to file or further processing. It's not
+a RawBufferList since the buffers may have a different format</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)">list</a>(<a class="reference internal" href="#pygama.raw.raw_buffer.RawBuffer" title="pygama.raw.raw_buffer.RawBuffer">RawBuffer</a>), <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pygama.raw.data_streamer.DataStreamer.read_chunk">
+<span class="sig-name descname"><span class="pre">read_chunk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chunk_mode_override</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rp_max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clear_full_buffers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbosity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygama.raw.data_streamer.DataStreamer.read_chunk" title="Permalink to this definition"></a></dt>
+<dd><p>Reads a chunk of data into raw buffers</p>
+<p>Reads packets until at least one buffer is too full to perform another
+read.</p>
+<p>Note: user is responsible for resetting / clearing the raw buffers prior
+to calling read_chunk again.</p>
+<p>Default version just calls read_packet() over and over. Overload as
+necessary.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chunk_mode_override</strong> (<em>'any_full'</em><em>, </em><em>'only_full'</em><em>, </em><em>'single_packet'</em><em>, or </em><em>None</em>) -- <p>None : do not override self.chunk_mode
+'any_full' : returns all raw buffers with data as soon as any one</p>
+<blockquote>
+<div><p>buffer gets full</p>
+</div></blockquote>
+<dl class="simple">
+<dt>'only_full'<span class="classifier">returns only those raw buffers that became full (or</span></dt><dd><p>nearly full) during the read. This minimizes the number of write calls.</p>
+</dd>
+<dt>'single_packet'<span class="classifier">returns all raw buffers with data after a single</span></dt><dd><p>read is performed. This is useful for streaming data out as soon
+as it is read in (e.g. for diagnostics or in-line analysis)</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>rp_max</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) -- maximum number of packets to read before returning anyway, even if
+one of the other conditions is not met</p></li>
+<li><p><strong>clear_full_buffers</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)"><em>bool</em></a>) -- automatically clear any buffers that report themselves as being full
+prior to reading the chunk. Set to False if clearing manually for a
+minor speed-up</p></li>
+<li><p><strong>verbosity</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) -- verbosity level for the initialize function</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>chunk_list</strong> -- chunk_list is the list of RawBuffers with data ready for writing to
+file or further processing. The list contains all buffers with data
+or just all full buffers depending on the flag full_only.  Note
+chunk_list is not a RawBufferList since the RawBuffers inside may
+not all have the same structure</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list of RawBuffers, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.10)">int</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pygama.raw.data_streamer.DataStreamer.read_packet">
+<span class="sig-name descname"><span class="pre">read_packet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">verbosity</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygama.raw.data_streamer.DataStreamer.read_packet" title="Permalink to this definition"></a></dt>
+<dd><p>Reads a single packet's worth of data in to the rb_lib</p>
+<p>Needs to be overloaded. Gets called by read_chunk()</p>
+<p>Needs to update self.any_full if any buffers would possibly over-fill on
+the next read</p>
+<p>Needs to update self.n_bytes_read too</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>still_has_data</strong> -- Returns true while there is still data to read</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.10)">bool</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 <section id="module-pygama.raw.raw_buffer">
 <span id="pygama-raw-raw-buffer-module"></span><h2>pygama.raw.raw_buffer module<a class="headerlink" href="#module-pygama.raw.raw_buffer" title="Permalink to this headline"></a></h2>
@@ -292,7 +435,7 @@ kw_dict. Note the use of the wildcard &quot;*&quot;: this will match all other d
 names / keys.</p>
 <dl>
 <dt>{</dt><dd><dl>
-<dt>&quot;FlashCamEventDecoder&quot;<span class="classifier">{</span></dt><dd><dl class="simple">
+<dt>&quot;FCEventDecoder&quot;<span class="classifier">{</span></dt><dd><dl class="simple">
 <dt>&quot;g{key:0&gt;3d}&quot;<span class="classifier">{</span></dt><dd><p>&quot;key_list&quot; : [ [24,64] ],
 &quot;out_stream&quot; : &quot;$DATADIR/{file_key}_geds.lh5:/geds&quot;</p>
 </dd>
@@ -301,7 +444,7 @@ names / keys.</p>
 &quot;spms&quot; : {</p>
 <blockquote>
 <div><p>&quot;key_list&quot; : [ [6,23] ],
-&quot;out_stream&quot; : &quot;$DATADIR/{file_key}_spms.lh5/sipms&quot;</p>
+&quot;out_stream&quot; : &quot;$DATADIR/{file_key}_spms.lh5:/spms&quot;</p>
 </div></blockquote>
 <p>},
 &quot;puls&quot; : {</p>
@@ -394,6 +537,11 @@ Socket example: '198.0.0.100:8000'</p>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="pygama.raw.raw_buffer.RawBuffer.is_full">
+<span class="sig-name descname"><span class="pre">is_full</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pygama.raw.raw_buffer.RawBuffer.is_full" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -403,8 +551,13 @@ Socket example: '198.0.0.100:8000'</p>
 <p>A RawBufferLibrary is a collection of RawBufferLists associated with the
 names of decoders that can write to them</p>
 <dl class="py method">
+<dt class="sig sig-object py" id="pygama.raw.raw_buffer.RawBufferLibrary.clear_full">
+<span class="sig-name descname"><span class="pre">clear_full</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pygama.raw.raw_buffer.RawBufferLibrary.clear_full" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="pygama.raw.raw_buffer.RawBufferLibrary.get_list_of">
-<span class="sig-name descname"><span class="pre">get_list_of</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attribute</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygama.raw.raw_buffer.RawBufferLibrary.get_list_of" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">get_list_of</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attribute</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygama.raw.raw_buffer.RawBufferLibrary.get_list_of" title="Permalink to this definition"></a></dt>
 <dd><p>Return a list of values of RawBuffer.attribute</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -484,6 +637,11 @@ and out_name fields</p></li>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.10)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
 <p>A RawBufferList holds a collection of RawBuffers of identical structure
 (same format lgdo's with the same fields).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pygama.raw.raw_buffer.RawBufferList.clear_full">
+<span class="sig-name descname"><span class="pre">clear_full</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pygama.raw.raw_buffer.RawBufferList.clear_full" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="pygama.raw.raw_buffer.RawBufferList.get_keyed_dict">
 <span class="sig-name descname"><span class="pre">get_keyed_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygama.raw.raw_buffer.RawBufferList.get_keyed_dict" title="Permalink to this definition"></a></dt>

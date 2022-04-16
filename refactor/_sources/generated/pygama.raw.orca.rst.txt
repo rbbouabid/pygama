@@ -19,6 +19,15 @@ pygama.raw.orca.orca\_digitizers module
    :show-inheritance:
    :private-members:
 
+pygama.raw.orca.orca\_flashcam module
+-------------------------------------
+
+.. automodule:: pygama.raw.orca.orca_flashcam
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   :private-members:
+
 pygama.raw.orca.orca\_pollers module
 ------------------------------------
 
