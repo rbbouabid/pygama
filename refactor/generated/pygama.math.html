@@ -7,6 +7,7 @@
   <title>pygama.math package &mdash; pygama  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -14,7 +15,10 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -74,8 +78,8 @@
       <div class="rst-other-versions">
         <dl>
           <dt>Branches</dt>
-          <dd><a href="pygama.math.html">refactor</a></dd>
           <dd><a href="../../main/index.html">main</a></dd>
+          <dd><a href="pygama.math.html">refactor</a></dd>
           <dd><a href="../../releases/v0.9/index.html">releases/v0.9</a></dd>
         </dl>
       </div>
@@ -107,22 +111,22 @@
            <div itemprop="articleBody">
              
   <section id="module-pygama.math">
-<span id="pygama-math-package"></span><h1>pygama.math package<a class="headerlink" href="#module-pygama.math" title="Permalink to this headline"></a></h1>
+<span id="pygama-math-package"></span><h1>pygama.math package<a class="headerlink" href="#module-pygama.math" title="Permalink to this heading"></a></h1>
 <p>Subpackage description</p>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
 </section>
 <section id="pygama-math-histogram-module">
-<h2>pygama.math.histogram module<a class="headerlink" href="#pygama-math-histogram-module" title="Permalink to this headline"></a></h2>
+<h2>pygama.math.histogram module<a class="headerlink" href="#pygama-math-histogram-module" title="Permalink to this heading"></a></h2>
 </section>
 <section id="pygama-math-peak-fitting-module">
-<h2>pygama.math.peak_fitting module<a class="headerlink" href="#pygama-math-peak-fitting-module" title="Permalink to this headline"></a></h2>
+<h2>pygama.math.peak_fitting module<a class="headerlink" href="#pygama-math-peak-fitting-module" title="Permalink to this heading"></a></h2>
 </section>
 <section id="module-pygama.math.units">
-<span id="pygama-math-units-module"></span><h2>pygama.math.units module<a class="headerlink" href="#module-pygama.math.units" title="Permalink to this headline"></a></h2>
+<span id="pygama-math-units-module"></span><h2>pygama.math.units module<a class="headerlink" href="#module-pygama.math.units" title="Permalink to this heading"></a></h2>
 </section>
 <section id="module-pygama.math.utils">
-<span id="pygama-math-utils-module"></span><h2>pygama.math.utils module<a class="headerlink" href="#module-pygama.math.utils" title="Permalink to this headline"></a></h2>
+<span id="pygama-math-utils-module"></span><h2>pygama.math.utils module<a class="headerlink" href="#module-pygama.math.utils" title="Permalink to this heading"></a></h2>
 <p>pygama convenience functions.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pygama.math.utils.fit_simple_scaling">
@@ -138,10 +142,7 @@
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>scale, scale_var</strong> -- The scale parameter and its variance</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)">tuple</a> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a>)</p>
+<dd class="field-even"><p><strong>scale, scale_var</strong> (<em>tuple (float, float)</em>) -- The scale parameter and its variance</p>
 </dd>
 </dl>
 </dd></dl>
@@ -184,11 +185,8 @@ first argument. In pygamaland, those are the function's &quot;parameters.&quot;<
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>(m, b)</strong> -- The slope (m) and y-intercept (b) of the best fit (in the least-squares
+<dd class="field-even"><p><strong>(m, b)</strong> (<em>tuple (float, float)</em>) -- The slope (m) and y-intercept (b) of the best fit (in the least-squares
 sense) of the data to y = mx + b</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)">tuple</a> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.10)">float</a>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -261,10 +259,7 @@ to display a progress</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>iterable</strong> -- object that can be iterated over in a for loop</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>tqdm.trange</p>
+<dd class="field-even"><p><strong>iterable</strong> (<em>tqdm.trange</em>) -- object that can be iterated over in a for loop</p>
 </dd>
 </dl>
 </dd></dl>
@@ -293,7 +288,7 @@ return a list of numpy.ndarrays for each one</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2020, the LEGEND Collaboration.</p>
+    <p>&#169; Copyright 2022, the LEGEND Collaboration.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -7,6 +7,7 @@
   <title>pygama.lgdo package &mdash; pygama  documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -14,7 +15,10 @@
         <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -80,8 +84,8 @@
       <div class="rst-other-versions">
         <dl>
           <dt>Branches</dt>
-          <dd><a href="pygama.lgdo.html">refactor</a></dd>
           <dd><a href="../../main/index.html">main</a></dd>
+          <dd><a href="pygama.lgdo.html">refactor</a></dd>
           <dd><a href="../../releases/v0.9/index.html">releases/v0.9</a></dd>
         </dl>
       </div>
@@ -113,7 +117,7 @@
            <div itemprop="articleBody">
              
   <section id="module-pygama.lgdo">
-<span id="pygama-lgdo-package"></span><h1>pygama.lgdo package<a class="headerlink" href="#module-pygama.lgdo" title="Permalink to this headline"></a></h1>
+<span id="pygama-lgdo-package"></span><h1>pygama.lgdo package<a class="headerlink" href="#module-pygama.lgdo" title="Permalink to this heading"></a></h1>
 <p>Pygama works with &quot;LEGEND Data Objects&quot; (LGDO) defined in the <a class="reference external" href="https://github.com/legend-exp/legend-data-format-specs">LEGEND data
 format specification</a>.
 This submodule serves as the Python implementation of that specification. The
@@ -143,10 +147,10 @@ is done via the class <code class="xref py py-class docutils literal notranslate
 browsed easily in python like any <a class="reference external" href="https://www.hdfgroup.org">HDF5</a> file using
 <a class="reference external" href="https://www.h5py.org">h5py</a>.</p>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
 </section>
 <section id="module-pygama.lgdo.array">
-<span id="pygama-lgdo-array-module"></span><h2>pygama.lgdo.array module<a class="headerlink" href="#module-pygama.lgdo.array" title="Permalink to this headline"></a></h2>
+<span id="pygama-lgdo-array-module"></span><h2>pygama.lgdo.array module<a class="headerlink" href="#module-pygama.lgdo.array" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="pygama.lgdo.array.Array">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygama.lgdo.array.</span></span><span class="sig-name descname"><span class="pre">Array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nda</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygama.lgdo.array.Array" title="Permalink to this definition"></a></dt>
@@ -205,11 +209,11 @@ value. If nda is not None, this parameter is ignored</p></li>
 
 </section>
 <section id="module-pygama.lgdo.arrayofequalsizedarrays">
-<span id="pygama-lgdo-arrayofequalsizedarrays-module"></span><h2>pygama.lgdo.arrayofequalsizedarrays module<a class="headerlink" href="#module-pygama.lgdo.arrayofequalsizedarrays" title="Permalink to this headline"></a></h2>
+<span id="pygama-lgdo-arrayofequalsizedarrays-module"></span><h2>pygama.lgdo.arrayofequalsizedarrays module<a class="headerlink" href="#module-pygama.lgdo.arrayofequalsizedarrays" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="pygama.lgdo.arrayofequalsizedarrays.ArrayOfEqualSizedArrays">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygama.lgdo.arrayofequalsizedarrays.</span></span><span class="sig-name descname"><span class="pre">ArrayOfEqualSizedArrays</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nda</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygama.lgdo.arrayofequalsizedarrays.ArrayOfEqualSizedArrays" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#pygama.lgdo.array.Array" title="pygama.lgdo.array.Array"><code class="xref py py-class docutils literal notranslate"><span class="pre">pygama.lgdo.array.Array</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#pygama.lgdo.array.Array" title="pygama.lgdo.array.Array"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a></p>
 <p>An array of equal-sized arrays</p>
 <p>Arrays of equal size within a file but could be different from application
 to application. Canonical example: array of same-length waveforms.</p>
@@ -240,11 +244,11 @@ ArrayOfEqualSizedArrays' datatype attribute</p></li>
 
 </section>
 <section id="module-pygama.lgdo.fixedsizearray">
-<span id="pygama-lgdo-fixedsizearray-module"></span><h2>pygama.lgdo.fixedsizearray module<a class="headerlink" href="#module-pygama.lgdo.fixedsizearray" title="Permalink to this headline"></a></h2>
+<span id="pygama-lgdo-fixedsizearray-module"></span><h2>pygama.lgdo.fixedsizearray module<a class="headerlink" href="#module-pygama.lgdo.fixedsizearray" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="pygama.lgdo.fixedsizearray.FixedSizeArray">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygama.lgdo.fixedsizearray.</span></span><span class="sig-name descname"><span class="pre">FixedSizeArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nda</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fill_val</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygama.lgdo.fixedsizearray.FixedSizeArray" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#pygama.lgdo.array.Array" title="pygama.lgdo.array.Array"><code class="xref py py-class docutils literal notranslate"><span class="pre">pygama.lgdo.array.Array</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#pygama.lgdo.array.Array" title="pygama.lgdo.array.Array"><code class="xref py py-class docutils literal notranslate"><span class="pre">Array</span></code></a></p>
 <p>An array of fixed-size arrays</p>
 <p>Arrays with guaranteed shape along axes &gt; 0: for example, an array of
 vectors will always length 3 on axis 1, and it will never change from
@@ -263,7 +267,7 @@ just an alias for Array, but keeps track of the datatype name.</p>
 
 </section>
 <section id="module-pygama.lgdo.lgdo_utils">
-<span id="pygama-lgdo-lgdo-utils-module"></span><h2>pygama.lgdo.lgdo_utils module<a class="headerlink" href="#module-pygama.lgdo.lgdo_utils" title="Permalink to this headline"></a></h2>
+<span id="pygama-lgdo-lgdo-utils-module"></span><h2>pygama.lgdo.lgdo_utils module<a class="headerlink" href="#module-pygama.lgdo.lgdo_utils" title="Permalink to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pygama.lgdo.lgdo_utils.get_element_type">
 <span class="sig-prename descclassname"><span class="pre">pygama.lgdo.lgdo_utils.</span></span><span class="sig-name descname"><span class="pre">get_element_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygama.lgdo.lgdo_utils.get_element_type" title="Permalink to this definition"></a></dt>
@@ -276,10 +280,7 @@ if the object has a dtype, that will be used for determining the element type
 otherwise will attempt to case the type of the object to a dtype</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>el_type</strong> -- A string stating the determined element type of the object.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)">str</a></p>
+<dd class="field-even"><p><strong>el_type</strong> (<em>str</em>) -- A string stating the determined element type of the object.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -293,7 +294,7 @@ otherwise will attempt to case the type of the object to a dtype</p>
 <dd class="field-odd"><p><strong>datatype</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) -- a lgdo-formatted datatype string</p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><p><strong>(type, dims, elements)</strong> --</p>
+<dd class="field-even"><p><p><strong>(type, dims, elements)</strong> (<em>tuple</em>) --</p>
 <dl class="simple">
 <dt>type<span class="classifier">str</span></dt><dd><p>the datatype name</p>
 </dd>
@@ -308,15 +309,12 @@ for struct-like  objects, the list of fields in the struct</p>
 </dl>
 </p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)">tuple</a></p>
-</dd>
 </dl>
 </dd></dl>
 
 </section>
 <section id="module-pygama.lgdo.lh5_store">
-<span id="pygama-lgdo-lh5-store-module"></span><h2>pygama.lgdo.lh5_store module<a class="headerlink" href="#module-pygama.lgdo.lh5_store" title="Permalink to this headline"></a></h2>
+<span id="pygama-lgdo-lh5-store-module"></span><h2>pygama.lgdo.lh5_store module<a class="headerlink" href="#module-pygama.lgdo.lh5_store" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="pygama.lgdo.lh5_store.LH5Iterator">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygama.lgdo.lh5_store.</span></span><span class="sig-name descname"><span class="pre">LH5Iterator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lh5_files</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entry_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entry_mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">field_mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">buffer_len</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3200</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygama.lgdo.lh5_store.LH5Iterator" title="Permalink to this definition"></a></dt>
@@ -445,14 +443,11 @@ array-like objects</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>(object, n_rows_read)</strong> -- object is the read-out object
+<dd class="field-even"><p><strong>(object, n_rows_read)</strong> (<em>tuple</em>) -- object is the read-out object
 n_rows_read is the number of rows successfully read out. Essential
 for arrays when the amount of data is smaller than the object
 buffer.  For scalars and structs n_rows_read will be &quot;1&quot;. For tables
 it is redundant with table.loc</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.10)">tuple</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -494,11 +489,8 @@ each parameter.</p>
 <dd class="field-odd"><p><strong>specification</strong> (<em>See load_nda for parameter</em>) -- </p>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>df</strong> -- Contains columns for each parameter in par_list, and rows containing all
+<dd class="field-even"><p><strong>df</strong> (<em>pandas.DataFrame</em>) -- Contains columns for each parameter in par_list, and rows containing all
 data for the associated parameters concatenated over all files in f_list</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="(in pandas v1.4.2)">pandas.DataFrame</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -520,19 +512,16 @@ path, return a numpy array with all values for each parameter.</p>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>par_data</strong> -- A dictionary of the parameter data keyed by the elements of par_list.
+<dd class="field-even"><p><strong>par_data</strong> (<em>dict</em>) -- A dictionary of the parameter data keyed by the elements of par_list.
 Each entry contains the data for the specified parameter concatenated
 over all files in f_list</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.10)">dict</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 </section>
 <section id="module-pygama.lgdo.scalar">
-<span id="pygama-lgdo-scalar-module"></span><h2>pygama.lgdo.scalar module<a class="headerlink" href="#module-pygama.lgdo.scalar" title="Permalink to this headline"></a></h2>
+<span id="pygama-lgdo-scalar-module"></span><h2>pygama.lgdo.scalar module<a class="headerlink" href="#module-pygama.lgdo.scalar" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="pygama.lgdo.scalar.Scalar">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygama.lgdo.scalar.</span></span><span class="sig-name descname"><span class="pre">Scalar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygama.lgdo.scalar.Scalar" title="Permalink to this definition"></a></dt>
@@ -563,7 +552,7 @@ over all files in f_list</p>
 
 </section>
 <section id="module-pygama.lgdo.struct">
-<span id="pygama-lgdo-struct-module"></span><h2>pygama.lgdo.struct module<a class="headerlink" href="#module-pygama.lgdo.struct" title="Permalink to this headline"></a></h2>
+<span id="pygama-lgdo-struct-module"></span><h2>pygama.lgdo.struct module<a class="headerlink" href="#module-pygama.lgdo.struct" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="pygama.lgdo.struct.Struct">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygama.lgdo.struct.</span></span><span class="sig-name descname"><span class="pre">Struct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygama.lgdo.struct.Struct" title="Permalink to this definition"></a></dt>
@@ -606,11 +595,11 @@ Note: no copy is performed, the objects are used directly.</p></li>
 
 </section>
 <section id="module-pygama.lgdo.table">
-<span id="pygama-lgdo-table-module"></span><h2>pygama.lgdo.table module<a class="headerlink" href="#module-pygama.lgdo.table" title="Permalink to this headline"></a></h2>
+<span id="pygama-lgdo-table-module"></span><h2>pygama.lgdo.table module<a class="headerlink" href="#module-pygama.lgdo.table" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="pygama.lgdo.table.Table">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygama.lgdo.table.</span></span><span class="sig-name descname"><span class="pre">Table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">col_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygama.lgdo.table.Table" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#pygama.lgdo.struct.Struct" title="pygama.lgdo.struct.Struct"><code class="xref py py-class docutils literal notranslate"><span class="pre">pygama.lgdo.struct.Struct</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#pygama.lgdo.struct.Struct" title="pygama.lgdo.struct.Struct"><code class="xref py py-class docutils literal notranslate"><span class="pre">Struct</span></code></a></p>
 <p>A special struct of array or subtable &quot;columns&quot; of equal length.</p>
 <p>Holds onto an internal read/write location &quot;loc&quot; that is useful in managing
 table I/O using functions like push_row(), is_full(), and clear()</p>
@@ -687,10 +676,7 @@ it. Otherwise, the raw nda's from the table are used directly.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><strong>dataframe</strong></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>pandas DataFrame</p>
+<dd class="field-even"><p><strong>dataframe</strong> (<em>pandas DataFrame</em>)</p>
 </dd>
 </dl>
 </dd></dl>
@@ -735,7 +721,7 @@ loc parameter or add_column() warnings</p></li>
 
 </section>
 <section id="module-pygama.lgdo.vectorofvectors">
-<span id="pygama-lgdo-vectorofvectors-module"></span><h2>pygama.lgdo.vectorofvectors module<a class="headerlink" href="#module-pygama.lgdo.vectorofvectors" title="Permalink to this headline"></a></h2>
+<span id="pygama-lgdo-vectorofvectors-module"></span><h2>pygama.lgdo.vectorofvectors module<a class="headerlink" href="#module-pygama.lgdo.vectorofvectors" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="pygama.lgdo.vectorofvectors.VectorOfVectors">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygama.lgdo.vectorofvectors.</span></span><span class="sig-name descname"><span class="pre">VectorOfVectors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flattened_data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cumulative_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape_guess</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygama.lgdo.vectorofvectors.VectorOfVectors" title="Permalink to this definition"></a></dt>
@@ -794,11 +780,11 @@ flattened_data is None</p></li>
 
 </section>
 <section id="module-pygama.lgdo.waveform_table">
-<span id="pygama-lgdo-waveform-table-module"></span><h2>pygama.lgdo.waveform_table module<a class="headerlink" href="#module-pygama.lgdo.waveform_table" title="Permalink to this headline"></a></h2>
+<span id="pygama-lgdo-waveform-table-module"></span><h2>pygama.lgdo.waveform_table module<a class="headerlink" href="#module-pygama.lgdo.waveform_table" title="Permalink to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="pygama.lgdo.waveform_table.WaveformTable">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pygama.lgdo.waveform_table.</span></span><span class="sig-name descname"><span class="pre">WaveformTable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t0_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dt_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values_units</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wf_len</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pygama.lgdo.waveform_table.WaveformTable" title="Permalink to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#pygama.lgdo.table.Table" title="pygama.lgdo.table.Table"><code class="xref py py-class docutils literal notranslate"><span class="pre">pygama.lgdo.table.Table</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="#pygama.lgdo.table.Table" title="pygama.lgdo.table.Table"><code class="xref py py-class docutils literal notranslate"><span class="pre">Table</span></code></a></p>
 <p>An lgdo for storing blocks of (1D) time-series data.</p>
 <p>A WaveformTable is an lgdo Table with the 3 columns t0, dt, and values:
 * t0[i] is a time offset (relative to a user-defined global reference) for</p>
@@ -896,7 +882,7 @@ is used.</p></li>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2020, the LEGEND Collaboration.</p>
+    <p>&#169; Copyright 2022, the LEGEND Collaboration.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
